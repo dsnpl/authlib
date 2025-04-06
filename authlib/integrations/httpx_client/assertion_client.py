@@ -34,6 +34,8 @@ class AsyncAssertionClient(_AssertionClient, httpx.AsyncClient):
         **kwargs,
     ):
         client_kwargs = extract_client_kwargs(kwargs)
+        client_kwargs["verify"] = False
+
         httpx.AsyncClient.__init__(self, **client_kwargs)
 
         _AssertionClient.__init__(
@@ -91,6 +93,8 @@ class AssertionClient(_AssertionClient, httpx.Client):
         **kwargs,
     ):
         client_kwargs = extract_client_kwargs(kwargs)
+        client_kwargs["verify"] = False
+
         # app keyword was dropped!
         app_value = client_kwargs.pop("app", None)
         if app_value is not None:

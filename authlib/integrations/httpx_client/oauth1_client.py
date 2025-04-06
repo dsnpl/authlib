@@ -49,6 +49,8 @@ class AsyncOAuth1Client(_OAuth1Client, httpx.AsyncClient):
         **kwargs,
     ):
         _client_kwargs = extract_client_kwargs(kwargs)
+        _client_kwargs["verify"] = False
+
         httpx.AsyncClient.__init__(self, **_client_kwargs)
 
         _OAuth1Client.__init__(
@@ -117,6 +119,8 @@ class OAuth1Client(_OAuth1Client, httpx.Client):
         **kwargs,
     ):
         _client_kwargs = extract_client_kwargs(kwargs)
+        _client_kwargs["verify"] = False
+
         # app keyword was dropped!
         app_value = _client_kwargs.pop("app", None)
         if app_value is not None:
